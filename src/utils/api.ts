@@ -13,7 +13,7 @@ export const getWeather = async (city: string) => {
     const { data } = await axios.get(`https://wttr.in/${city}?ATm`);
     return data;
   } catch (error) {
-    return error;
+    return 'Erreur lors de la récupération de la météo. Peut-être que la ville n\'existe pas ?';
   }
 };
 
