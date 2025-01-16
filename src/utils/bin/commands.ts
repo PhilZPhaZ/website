@@ -8,7 +8,7 @@ export const help = async (args: string[]): Promise<string> => {
   const commands = Object.keys(bin).sort().join(', ');
   var c = '';
   for (let i = 1; i <= Object.keys(bin).sort().length; i++) {
-      c += Object.keys(bin).sort()[i - 1] + '\n';
+    c += Object.keys(bin).sort()[i - 1] + '\n';
   }
   return `Bienvenue! Ici s'affiche la liste des commandes disponibles:
 \n${c}\n
@@ -67,12 +67,12 @@ export const quisuisje = async (args: string[]): Promise<string> => {
 
 export const date = async (args: string[]): Promise<string> => {
   return new Intl.DateTimeFormat('fr-FR', {
-    weekday: 'long', 
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric', 
-    hour: 'numeric', 
-    minute: 'numeric', 
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
     second: 'numeric'
   }).format(new Date());
 };
@@ -95,4 +95,35 @@ export const bannière = (args?: string[]): string => {
 Taper 'help' pour afficher la liste des commandes.
 Taper 'résumé' pour afficher un court résumé.
 `;
+};
+
+export const calculer = async (args: string[]): Promise<string> => {
+  try {
+    const result = eval(args.join(' '));
+    return result.toString();
+  } catch (e) {
+    return 'Erreur de calcul. Veuillez vérifier votre expression.';
+  }
+};
+
+export const photo = async (args: string[]): Promise<string> => {
+  const imageLink = [
+    'https://hp42dmfpdttis9mx.public.blob.vercel-storage.com/1.jpeg',
+    'https://hp42dmfpdttis9mx.public.blob.vercel-storage.com/2.jpg',
+    'https://hp42dmfpdttis9mx.public.blob.vercel-storage.com/3.jpg',
+    'https://hp42dmfpdttis9mx.public.blob.vercel-storage.com/4.jpg',
+    'https://hp42dmfpdttis9mx.public.blob.vercel-storage.com/5.jpg',
+  ];
+
+  let html = '';
+  for (let i = 0; i < imageLink.length; i += 2) {
+    html += '<div style="display: flex; justify-content: space-between;">';
+    html += `<img src="${imageLink[i]}" alt="Image" style="width: 50%; height: auto;">`;
+    if (i + 1 < imageLink.length) {
+      html += `<img src="${imageLink[i + 1]}" alt="Image" style="width: 50%; height: auto;">`;
+    }
+    html += '</div>';
+  }
+
+  return html;
 };
